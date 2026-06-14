@@ -28,7 +28,7 @@ const navigation = [
 
 export const Sidebar = () => {
   return (
-    <aside className="hidden md:block w-64 border-r bg-card">
+    <aside className="hidden md:block w-64 shrink-0 border-r bg-card sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto">
       <nav className="flex flex-col gap-1 p-4">
         {navigation.map((item) => (
           <NavLink

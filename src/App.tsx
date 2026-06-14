@@ -9,6 +9,7 @@ import { NotificationProvider } from "./contexts/NotificationContext";
 import { ThemeCustomizationProvider } from "./contexts/ThemeCustomizationContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import ErrorBoundary from "./components/ErrorBoundary";
+import ScrollToTop from "./components/ScrollToTop";
 import Splash from "./pages/Splash";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
