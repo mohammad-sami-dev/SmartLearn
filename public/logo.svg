@@ -1,0 +1,8 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Modern Education Logo for SmartLearn AI -->
+  <rect width="64" height="64" rx="12" fill="#2563EB"/>
+  <path d="M32 12L48 22V42C48 48 42 52 32 52C22 52 16 48 16 42V22L32 12Z" fill="white" opacity="0.2"/>
+  <path d="M32 16L44 24V40C44 44 40 47 32 47C24 47 20 44 20 40V24L32 16Z" fill="white"/>
+  <circle cx="32" cy="32" r="6" fill="#2563EB"/>
+  <path d="M26 32L30 36L38 28" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
