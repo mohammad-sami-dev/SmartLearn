@@ -11,7 +11,6 @@ interface ProtectedRouteProps {
 export const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
   const { user, profile, loading } = useAuth();
 
-  // Show loading spinner while checking auth OR while profile is being fetched
   if (loading || (user && !profile)) {
     return (
       <div className="flex min-h-screen items-center justify-center">
@@ -23,7 +22,6 @@ export const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) 
     );
   }
 
-  // If authenticated
   if (user && profile) {
     if (allowedRoles && !allowedRoles.includes(profile.role)) {
       switch (profile.role) {
@@ -38,6 +36,21 @@ export const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) 
     return <>{children}</>;
   }
 
-  // Not authenticated - redirect to login
+  // Demo mode - works in all environments
+  const demoRole = localStorage.getItem('demoRole') as UserRole | null;
+  if (demoRole) {
+    if (allowedRoles && !allowedRoles.includes(demoRole)) {
+      switch (demoRole) {
+        case "admin":
+          return <Navigate to="/admin" replace />;
+        case "teacher":
+          return <Navigate to="/teacher" replace />;
+        default:
+          return <Navigate to="/dashboard" replace />;
+      }
+    }
+    return <>{children}</>;
+  }
+
   return <Navigate to="/login" replace />;
 };
