@@ -41,7 +41,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check active session
     const checkSession = async () => {
       try {
         const { data: { session } } = await supabase.auth.getSession();
@@ -60,7 +59,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     checkSession();
 
-    // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (_event, session) => {
         setUser(session?.user ?? null);
@@ -96,7 +94,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  // Ensure a profile row exists for the authenticated user
   const ensureProfile = async (
     authUser: User,
     defaults?: { role?: UserRole; full_name?: string; avatar_url?: string; department?: string; bio?: string }
@@ -140,16 +137,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const ensured = await ensureProfile(data.user);
       await fetchProfile(data.user.id);
 
-      switch (ensured.role) {
-        case "admin":
-          navigate("/admin");
-          break;
-        case "teacher":
-          navigate("/teacher");
-          break;
-        default:
-          navigate("/dashboard");
-      }
+      setTimeout(() => {
+        switch (ensured.role) {
+          case "admin":
+            navigate("/admin");
+            break;
+          case "teacher":
+            navigate("/teacher");
+            break;
+          default:
+            navigate("/dashboard");
+        }
+      }, 500);
     }
   };
 
@@ -175,6 +174,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (data.user) {
       await ensureProfile(data.user, { role, full_name: fullName });
       await fetchProfile(data.user.id);
+
+      setTimeout(() => {
+        switch (role) {
+          case "admin":
+            navigate("/admin");
+            break;
+          case "teacher":
+            navigate("/teacher");
+            break;
+          default:
+            navigate("/dashboard");
+        }
+      }, 500);
     }
   };
 
